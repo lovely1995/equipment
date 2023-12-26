@@ -1,0 +1,75 @@
+.red-circle, .yellow-circle, .green-circle {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    margin-left: 6px;
+}
+
+.red-circle {
+    background-color: #ff6347; /* Red color */
+}
+
+.yellow-circle {
+    background-color: #ffd700; /* Yellow color */
+}
+
+.green-circle {
+    background-color: #7cfc00; /* Green color */
+}
+
+body {
+    background-color: #f8f9fa; /* Set a light background color */
+}
+
+.container {
+    margin-top: 20px; /* Add some top margin to the container */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th {
+ 
+    font-size: 16px;
+}
+
+td {
+font-size: 15px;
+
+}
+
+th, td {
+    
+    padding: 10px;
+    text-align: center;
+}
+
+h1 {
+    font-weight: bold; /* Make the text bold */
+    text-align: center; /* Center-align h1 headings */
+
+    color: #007bff; /* Set a blue color for the h1 headings */
+    font-family: 'Arial', sans-serif; /* Specify a font family */
+}
+
+.col-sm-4 {
+    margin-bottom: 20px; /* Add bottom margin to the columns */
+}
+
+#divChart {
+    background-color: #fff; /* Set a white background color for the chart div */
+    padding: 1px; /* Add some padding to the chart div */
+    border-radius: 5px; /* Add rounded corners to the chart div */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+}
+
+canvas {
+    width: 100%; /* Make the canvas fill its container */
+    height: auto; /* Maintain aspect ratio */
+}
+
+

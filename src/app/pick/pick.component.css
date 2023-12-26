@@ -1,0 +1,44 @@
+td,th,div,h1,h3,p,mat-paginator {
+    font-family: 'YourOTFFontName', sans-serif;
+  }
+
+
+  td {
+    padding: 0px;
+
+  }
+
+  .tbpaddingNo {
+    padding-top: 40px;
+  font-size: 30px;
+  width: 50px;
+  /* 设置边框宽度为2px或您喜欢的粗细 */
+  border-width: 5px;
+  /* 可以选择其他样式，如solid、dotted等 */
+  border-style: solid;
+  border-color: black;
+  }
+  .tbpadding {
+    padding: 30px;
+        /* 设置边框宽度为2px或您喜欢的粗细 */
+        border-width: 5px;
+        /* 可以选择其他样式，如solid、dotted等 */
+        border-style: solid;
+         border-color: black;
+  }
+/* 自定义表格边框粗细 */
+.table-bordered {
+   /* 设置边框宽度为2px或您喜欢的粗细 */
+  border-width: 5px;
+  /* 可以选择其他样式，如solid、dotted等 */
+  border-style: solid;
+  border-color: black;
+}
+
+
+/* 自定义宽度 */
+.narrow-td {
+  width: 5px; /* 自定义宽度，可以根据需要进行调整 */
+}
+
+

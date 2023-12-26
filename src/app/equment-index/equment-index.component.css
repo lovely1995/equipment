@@ -1,0 +1,36 @@
+
+.red-circle {
+  width: 20px;
+  height: 20px;
+  background-color: red;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+
+#divChart {
+  background-color: #fff; /* Set a white background color for the chart div */
+  padding: 10px; /* Add some padding to the chart div */
+  border-radius: 5px; /* Add rounded corners to the chart div */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+}
+
+canvas {
+  width: 100%; /* Make the canvas fill its container */
+  height: auto; /* Maintain aspect ratio */
+}
+h1 {
+  font-weight: bold; /* Make the text bold */
+  text-align: center; /* Center-align h1 headings */
+  margin-top: 20px; /* Add top margin to h1 headings */
+  color: #007bff; /* Set a blue color for the h1 headings */
+  font-family: 'Arial', sans-serif; /* Specify a font family */
+}
+
+
+/* Add this to your global styles or your component's CSS file */
+
+.table-container {
+  height: 190px; /* Set the desired height */
+  overflow-y: auto; /* Enable vertical scrolling */
+}

@@ -1,0 +1,44 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm">
+            <h1>現有車序</h1>
+            <p>前保:{{front}}</p>
+            <p>後保:{{back}}</p>
+            <p>後軸:{{backAx}}</p>
+        </div>
+        <div class="col-sm">
+            <h1>設定初始化面車序</h1>
+            <select class="form-select form-select-lg mb-3" aria-label="Large select example" [(ngModel)]="selectedValue">
+                <option selected>Open this select menu</option>
+                <option value="前保">前保</option>
+                <option value="後保">後保</option>
+                <option value="後軸">後軸</option>
+              </select>
+                <p>(個位數必定為1)</p>
+            <input type="number" [(ngModel)]="inputVal"> 
+            <br>
+            <button class="btn btn-outline-primary" (click)="inputCarqty()">搜尋</button>
+            <button class="btn btn-outline-danger" (click)="init()">重置</button>
+
+  
+      
+          
+        </div>
+        <div class="col-sm" style="text-align: center;">
+            <h1>預期車序</h1>
+            <div *ngIf="data">
+                <div *ngFor="let n of data"  >
+                    <button class="btn btn-outline-primary" (click)="givebtn_select(n.CAR_QTY)">
+                        <a>{{n.CAR_QTY}} {{n.SPEC}}</a>
+                    </button>
+                </div>
+            </div>
+
+            <p>您選擇的車序是:</p><h1 style="color: blue;">{{btn_select}}</h1>
+            <button *ngIf="searchOK" class="btn btn-outline-success" >
+                [選擇(測試中)]{{selectedValue}}車序-{{btn_select}}
+            </button>
+        </div>
+    </div>
+</div>
+

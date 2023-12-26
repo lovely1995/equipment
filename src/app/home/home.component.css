@@ -1,0 +1,8 @@
+.pding{
+    padding: 50px;
+ display: flex; align-items: center;
+}
+
+.imgmar{
+    margin-right: 10px;
+}

@@ -1,0 +1,275 @@
+<!-- 種類:{{NAME}}
+起點車序:{{CAR_QTY}}
+目前第幾台:{{CNT_FOR_CNT}} -->
+
+
+
+
+<div class="container-fluid">
+    <div class="text-center" *ngIf="LOAD_FINISH === false">
+        <div class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+    <div class="row" *ngIf="LOAD_FINISH">
+        <div class="col-sm-4">
+            <div  *ngIf="PRED_TI_FINISH"  >
+                <h3 *ngIf="NAME=='後軸'">預計進線時間{{PRED_TI}}</h3>
+            </div>
+    
+            <div class="spinner-border" role="status" *ngIf="PRED_TI_FINISH === false "  >
+                <span class="visually-hidden">Loading...</span>
+            </div>
+
+            <div >
+                <h3>{{NAME}} 車序範圍:{{CAR_QTY}}~{{CAR_QTY_LAST}}</h3>
+            </div>
+
+            <!--表格-->
+            <div class="col-sm" *ngIf="LOAD_FINISH">
+                <table class="table table-sm " style="text-align: center;" >
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">車序</th>
+                            <th scope="col">車型</th>
+                            <th scope="col">規格碼</th>
+                            <th scope="col">選配</th>
+                                    
+                        </tr>
+                    </thead>
+    
+                    <tbody >
+                            <tr *ngFor="let item of DATA; let i = index"  >
+                                <th *ngIf="i==CNT_FOR_CNT" style="background-color: lightgreen;">{{i+1}}</th>
+                                <td *ngIf="i==CNT_FOR_CNT" style="background-color: lightgreen;">{{item.CAR_QTY}}</td>
+                                <td *ngIf="i==CNT_FOR_CNT" style="background-color: lightgreen;">{{item.MODL}}</td>
+                                <td *ngIf="i==CNT_FOR_CNT" style="background-color: lightgreen;">{{item.SPEC}} </td>
+                                <td *ngIf="i==CNT_FOR_CNT" style="background-color: lightgreen;">{{item.OPTION_CODE}} </td>
+                                
+                                <!-- <td *ngIf="i==CNT_FOR_CNT && NAME=='後軸'" style="background-color: lightblue;">
+                                    <p>{{ item.OK==1 ?  '[OK]' : ''}}</p>
+                                </td> -->
+    
+                                <th *ngIf="i!=CNT_FOR_CNT && item.OK!=1">{{i+1}}</th>
+                                <td *ngIf="i!=CNT_FOR_CNT && item.OK!=1">{{item.CAR_QTY}}</td>
+                                <td *ngIf="i!=CNT_FOR_CNT && item.OK!=1">{{item.MODL}}</td>
+                                <td *ngIf="i!=CNT_FOR_CNT && item.OK!=1">{{item.SPEC}} </td>
+                                <td *ngIf="i!=CNT_FOR_CNT && item.OK!=1">{{item.OPTION_CODE}} </td>
+                        
+                            
+                                <th *ngIf="i!=CNT_FOR_CNT && item.OK==1" style="background-color: gray;">{{i+1}}</th>
+                                <td *ngIf="i!=CNT_FOR_CNT && item.OK==1" style="background-color: gray;">{{item.CAR_QTY}}</td>
+                                <td *ngIf="i!=CNT_FOR_CNT && item.OK==1" style="background-color: gray;">{{item.MODL}}</td>
+                                <td *ngIf="i!=CNT_FOR_CNT && item.OK==1" style="background-color: gray;">{{item.SPEC}} </td>
+                                <td *ngIf="i!=CNT_FOR_CNT && item.OK==1" style="background-color: gray;">{{item.OPTION_CODE}} </td>
+                                
+                            </tr>
+                    </tbody>
+    
+                </table>
+                <div class="col-sm">
+                    <table class="table table-sm table-bordered  border-dark" *ngIf="foundData && NAME!='後軸'" style="text-align: center;">
+                        <tbody >
+                                <tr>
+                                    <td>車序:{{foundData.CAR_QTY}}</td>
+                                    <td>車型:{{foundData.MODL}}</td>
+                                </tr>
+                                <tr>
+                                    <td>規格:{{foundData.SPEC}}</td>
+                                    <td>選配:{{foundData.OPTION_CODE}}</td>
+                                </tr>
+                                <tr>
+                                    <td>車色:{{foundData.COLR}}</td>
+                                    <td>車身號:{{foundData.CHS_NO}}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="table-active">T/I時間:{{formatDateToYYYYMMDDHHMMSS(foundData.TI_DTTM)}}</td>
+                                </tr>
+                            
+            
+                                <!-- <p>
+                                    更新時間:
+                                    <a *ngIf="getYear(foundData.UPDATETIME)">{{formatDateToYYYYMMDDHHMMSS(foundData.UPDATETIME)}}</a>
+                                </p> -->
+                        </tbody>
+                    </table>
+                    <!-- <button type="button" class="btn btn-outline-primary" *ngIf="NAME=='後軸' && foundData.OK==0" (click)="saveData(foundData.CAR_QTY)">我撿完了</button> -->
+                </div>
+                <div class="row">
+                    <div class="col-sm-4 "></div>
+                    <div class="col">
+                        <button *ngIf="NAME=='後軸'" class="btn btn-outline-success  " (click)="saveDataList()" >全部完成</button>
+                    </div>
+                    <div class="col">
+                        <button *ngIf="NAME=='後軸'" class="btn btn-outline-info  " (click)="getData()" >重新整理</button>
+                    </div>
+                </div>
+                <br>
+                <div class="row" *ngIf="LOAD_FINISH">
+                    <div class="col-sm" *ngIf="NAME=='後軸'">
+                        <button  class="btn btn-outline-dark" (click)="minusCNT_FOR_CNT_AX()" >上一頁</button>
+                    </div>
+                    <div class="col-sm" *ngIf="NAME=='後軸'">
+                        <button  class="btn btn-outline-danger" (click)="delDataList()" >取消完成</button>
+                    </div>
+                    <div class="col-sm"  *ngIf="NAME=='後軸'">
+                        <button *ngIf="NODATA===false " class="btn btn-outline-dark" (click)="addCNT_FOR_CNT_AX()" >下一頁</button>
+                        <!--no data-->
+                        <div style="color: red;"  *ngIf="NODATA">
+                            查無資料
+                        </div>
+                    </div>
+                    <div class="col-sm-5" *ngIf="NAME!='後軸'">
+                        <button class="btn btn-outline-primary btn-lg btn-block" (click)="minusCNT_FOR_CNT()" >
+                            <a style="font-size: 30px;">上一台</a>
+                        </button>
+                    </div>
+                    <div class="col-sm-1" *ngIf="NAME!='後軸'"></div>
+                    <div class="col-sm-5" *ngIf="NAME!='後軸'">
+                        <button  class="btn btn-outline-primary btn-lg btn-block" (click)="addCNT_FOR_CNT()" >
+                            <a style="font-size: 30px;">下一台</a>
+                        </button>
+                    </div>
+                                            
+                        
+            
+                </div>
+            </div>
+        </div>
+
+   
+
+        <div class="col-sm" *ngIf="foundData">
+            <!--圖片 APPLE 670紀錄-->
+            
+            <p *ngIf="NAME!='後軸'">{{foundData.PATH}}<a *ngIf="!foundData.PATH">查無圖片</a></p>
+            <img  *ngIf="NAME!='後軸' && foundData.PATH" [src]=" foundData.PATH + '.jpg' " alt="picture" style="width:670px;">
+            <!--END-->
+
+            <!--後軸顏色表-->
+            <div *ngIf="NAME=='後軸'">
+                <!-- <div *ngFor="let item of DATA; let i = index" >
+                    <div style="display: flex; align-items: center;" >
+                        <div *ngIf="item.CUST_COLR!=null" style=" width: 20px; height: 20px; margin-right: 5px;" [style.background]="item.CUST_COLR"  ></div>
+                        <span>{{i}} {{item.COLOR_CHINESE}} </span>
+                        <div *ngIf="item.CUST_COLR==null">尚未維護後軸顏色</div>                  
+                    </div>
+                </div> -->
+           
+                <!-- <div *ngFor="let ii of DATA">
+                    <a>p:{{ii.MODL}} {{ii.COLR}} {{ii.SPEC}}</a>
+                </div> -->
+           
+                <!-- <table class="table table-bordered table-hover" style="text-align: center;">
+                    <tbody>
+                      <ng-container *ngFor="let row of DATA.slice(0, 5); let i = index">
+                        <tr>
+                            <td class="tbpadding"><h1 style="font-size: 55px;">{{ 2 * i + 1 }}</h1></td>
+                                <td class="tbpadding" [style.background-color]="DATA[ 2 * i + 1-1 ].COLR || ''">
+                                <h1 style="font-size: 55px;">{{ row.MODL | slice:0:3 }} {{row.CAR_CONTENT}}</h1>
+
+                            </td>
+                            <td class="tbpadding"><h1 style="font-size: 55px;">{{ 2 * i + 2 }}</h1></td>
+                                <td class="tbpadding" [style.background-color]="DATA[2 * i + 2-1].COLR || ''">
+                                <h1 style="font-size: 55px;">{{ DATA[i + 1]?.MODL | slice:0:3 }} {{DATA[i + 1]?.CAR_CONTENT}}</h1>
+                             
+                            </td>
+                        </tr>
+                      </ng-container>
+                    </tbody>
+                  </table> -->
+
+                <table class="table table-bordered" style="text-align: center;">
+  
+
+                    <tbody>
+                      <tr>
+                        <th class="tbpaddingNo" scope="row" >1</th>
+                        <td class="tbpadding" [style.background-color]="DATA[0].COLR">
+                            <h1 style="font-size: 85px;">{{DATA[0].MODL | slice:0:3}}</h1>
+                            {{DATA[0].CAR_CONTENT}}
+                        </td>
+                        <th class="tbpaddingNo" scope="row">6</th>
+                        <td class="tbpadding" [style.background-color]="DATA[5].COLR" >
+                            <h1 style="font-size: 85px;">{{DATA[5].MODL | slice:0:3}}</h1>
+                            {{DATA[5].CAR_CONTENT}}
+                        </td>
+                      </tr>
+                      <tr>
+                        <th class="tbpaddingNo" scope="row">2</th>         
+                        <td class="tbpadding" [style.background-color]="DATA[1].COLR" >
+                            <h1 style="font-size: 85px;">{{DATA[1].MODL | slice:0:3}}</h1>
+                            {{DATA[1].CAR_CONTENT}}
+                        </td>
+                        <th class="tbpaddingNo" scope="row">7</th>
+                        <td class="tbpadding" [style.background-color]="DATA[6].COLR" >
+                            <h1 style="font-size: 85px;">{{DATA[6].MODL | slice:0:3}}</h1>
+                            {{DATA[6].CAR_CONTENT}}
+                        </td>
+                      </tr>
+                      <tr>
+                        <th class="tbpaddingNo" scope="row">3</th>
+                        <td class="tbpadding" [style.background-color]="DATA[2].COLR" >
+                            <h1 style="font-size: 85px;">{{DATA[2].MODL | slice:0:3}}</h1>
+                            {{DATA[2].CAR_CONTENT}}
+                        </td>
+                        <th class="tbpaddingNo" scope="row">8</th>
+                        <td class="tbpadding" [style.background-color]="DATA[7].COLR" >
+                            <h1 style="font-size: 85px;">{{DATA[7].MODL | slice:0:3}}</h1>
+                            {{DATA[7].CAR_CONTENT}}
+                        </td>
+                      </tr>
+                      <tr>
+                        <th class="tbpaddingNo" scope="row">4</th>
+                        <td class="tbpadding" [style.background-color]="DATA[3].COLR" >
+                            <h1 style="font-size: 85px;">{{DATA[3].MODL | slice:0:3}}</h1>
+                            {{DATA[3].CAR_CONTENT}}
+                        </td>
+                        <th class="tbpaddingNo" scope="row">9</th>
+                        <td class="tbpadding" [style.background-color]="DATA[8].COLR" >
+                            <h1 style="font-size: 85px;">{{DATA[8].MODL | slice:0:3}}</h1>
+                            {{DATA[8].CAR_CONTENT}}
+                        </td>
+                      </tr>
+                      <tr>
+                        <th class="tbpaddingNo" scope="row">5</th>
+                        <td class="tbpadding" [style.background-color]="DATA[4].COLR" >
+                            <h1 style="font-size: 85px;">{{DATA[4].MODL | slice:0:3}}</h1>
+                            {{DATA[4].CAR_CONTENT}}
+                        </td>
+                        <th class="tbpaddingNo" scope="row">10</th>
+                        <td class="tbpadding" [style.background-color]="DATA[9].COLR" >
+                            <h1 style="font-size: 85px;">{{DATA[9].MODL | slice:0:3}}</h1>
+                            {{DATA[9].CAR_CONTENT}}
+                        </td>
+                      </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!--END-->
+            
+
+
+            <!--建立一個table html-->
+            
+            
+
+        
+        </div>
+
+    </div>
+
+    
+
+
+</div>
+
+
+
+
+
+
+
+

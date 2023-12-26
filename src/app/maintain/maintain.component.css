@@ -1,0 +1,6 @@
+.selfFont {
+    font-family: 'YourOTFFontName', sans-serif;
+  }
+  td,th,div,h1,p,mat-paginator {
+    font-family: 'YourOTFFontName', sans-serif;
+  }

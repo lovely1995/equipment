@@ -1,0 +1,20 @@
+/* You can add global styles to this file, and also import other style files */
+/* 
+html, body { 
+    height: 100%; 
+    margin: 0;
+
+} */
+@font-face {
+    font-family: 'YourOTFFontName';
+    src: url('./assets/fonts/NotoSansTC-Medium.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  /* .selfFont {
+    font-family: 'YourOTFFontName', sans-serif;
+  } */
+
+
+
